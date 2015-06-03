@@ -203,7 +203,7 @@ do_route(From, Domain, Destinations, Packet) ->
 	[] -> do_route_normal(From, Destinations, Packet);
 
 	%% If available, send the packet using multicast service
-	[R] ->
+	[R|_] ->
 	    case R#route_multicast.pid of
 		Pid when is_pid(Pid) ->
 		    Pid ! {route_trusted, From, Destinations, Packet};
